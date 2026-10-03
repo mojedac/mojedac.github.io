@@ -16,10 +16,11 @@ const jsonLd={'@context':'https://schema.org','@type':'Person',name:'Marcelo Oje
   <meta name="theme-color" content="#08111f" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href={canonicalURL} />
   <link rel="alternate" hreflang={lang} href={canonicalURL} />
   <link rel="alternate" hreflang={otherLang} href={new URL(otherPath,Astro.site)} />
-  <meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalURL} /><meta property="og:site_name" content="Marcelo Ojeda — Software Architecture" />
+  <meta property="og:type" content="website" /><meta property="og:locale" content={lang === "es" ? "es_CL" : "en_US"} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalURL} /><meta property="og:site_name" content="Marcelo Ojeda — Software Architecture" />
   <meta name="twitter:card" content="summary_large_image" /><title>{title}</title>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </head>
