@@ -1,74 +1,53 @@
 ---
-interface Props {
-  title: string;
-  description: string;
-  canonical?: string;
-}
-const { title, description, canonical = Astro.url.pathname } = Astro.props;
-const canonicalURL = new URL(canonical, Astro.site);
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Marcelo Ojeda Cárdenas',
-  url: 'https://mojedac.github.io',
-  jobTitle: 'Software Architect',
-  sameAs: [
-    'https://github.com/mojedac',
-    'https://www.linkedin.com/in/mojedac/'
-  ],
-  knowsAbout: [
-    'Software Architecture','Solution Architecture','Systems Integration',
-    'SaaS Architecture','Enterprise Systems','Java','Spring Boot',
-    'REST APIs','Google Cloud Platform'
-  ]
-};
+interface Props { title:string; description:string; lang?:'es'|'en'; canonical?:string; }
+const {title,description,lang='es',canonical=Astro.url.pathname}=Astro.props;
+const canonicalURL=new URL(canonical,Astro.site);
+const otherLang=lang==='es'?'en':'es';
+const otherPath=lang==='es'?('/en'+(Astro.url.pathname==='/'?'':Astro.url.pathname)):Astro.url.pathname.replace(/^\/en/,'')||'/';
+const jsonLd={'@context':'https://schema.org','@type':'Person',name:'Marcelo Ojeda Cárdenas',url:'https://mojedac.github.io',jobTitle:'Software Architect',sameAs:['https://github.com/mojedac','https://www.linkedin.com/in/mojedac/'],knowsAbout:['Software Architecture','Solution Architecture','Systems Integration','SaaS Architecture','Enterprise Systems','Java','Spring Boot','REST APIs','Google Cloud Platform']};
 ---
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <meta name="description" content={description} />
-  <meta name="author" content="Marcelo Ojeda Cárdenas" />\n  <meta name="theme-color" content="#101418" />\n  <meta name="robots" content="index,follow,max-image-preview:large" />\n  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="author" content="Marcelo Ojeda Cárdenas" />
+  <meta name="theme-color" content="#08111f" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="canonical" href={canonicalURL} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonicalURL} />
-  <meta property="og:site_name" content="Marcelo Ojeda — Software Architecture" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <title>{title}</title>
+  <link rel="alternate" hreflang={lang} href={canonicalURL} />
+  <link rel="alternate" hreflang={otherLang} href={new URL(otherPath,Astro.site)} />
+  <meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalURL} /><meta property="og:site_name" content="Marcelo Ojeda — Software Architecture" />
+  <meta name="twitter:card" content="summary_large_image" /><title>{title}</title>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </head>
 <body>
-  <a class="skip" href="#contenido">Ir al contenido</a>
-  <header class="site-header">
-    <a class="brand" href="/">MO<span>.</span></a>
-    <nav aria-label="Navegación principal">
-      <a href="/#casos">Casos</a>
-      <a href="/#metodo">Enfoque</a>\n      <a href="/#experiencia">Experiencia</a>
-      <a href="/about/">Perfil</a>
-      <a href="/#contacto">Contacto</a>
-    </nav>
-  </header>
-  <main id="contenido"><slot /></main>
-  <footer><span>Marcelo Ojeda</span><span>Software Architecture · Santiago, Chile</span></footer>
-</body>
-</html>
-
+<a class="skip" href="#content">{lang==='es'?'Ir al contenido':'Skip to content'}</a>
+<header class="site-header">
+  <a class="brand" href={lang==='es'?'/':'/en/'} aria-label="Marcelo Ojeda, home"><span class="mark">M/O</span><span class="brand-text">Marcelo Ojeda<small>Software Architect</small></span></a>
+  <nav aria-label={lang==='es'?'Navegación principal':'Main navigation'}>
+    <a href={lang==='es'?'/#work':'/en/#work'}>{lang==='es'?'Casos':'Work'}</a>
+    <a href={lang==='es'?'/about/':'/en/about/'}>{lang==='es'?'Perfil':'About'}</a>
+    <a class="lang" href={otherPath}>{otherLang.toUpperCase()}</a>
+  </nav>
+</header>
+<main id="content"><slot /></main>
+<footer><div><strong>Marcelo Ojeda</strong><span>Software Architect · Santiago, Chile</span></div><div class="footer-links"><a href="https://www.linkedin.com/in/mojedac/" rel="me">LinkedIn</a><a href="https://github.com/mojedac" rel="me">GitHub</a></div></footer>
+</body></html>
 <style is:global>
-:root{--ink:#101418;--muted:#5d6770;--line:#dfe4e8;--paper:#f7f8f7;--accent:#155eef;--max:1180px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
-a{color:inherit}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:white;padding:.6rem;z-index:20}
-.site-header,footer{max-width:var(--max);margin:auto;padding:1.4rem 2rem;display:flex;align-items:center;justify-content:space-between}
-.site-header{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(12px)}.brand{text-decoration:none;font-weight:800;font-size:1.2rem;letter-spacing:-.04em}.brand span,.eyebrow{color:var(--accent)}
-nav{display:flex;gap:1.5rem}nav a{text-decoration:none;color:var(--muted);font-size:.9rem}nav a:hover{color:var(--ink)}
-section{max-width:var(--max);margin:auto;padding:6.5rem 2rem}.hero{min-height:78vh;display:grid;align-content:center}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:700}
-h1{font-size:clamp(3.4rem,8vw,7.6rem);line-height:.91;letter-spacing:-.065em;margin:.5rem 0 1.8rem;max-width:1050px}h2{font-size:clamp(2rem,4vw,4rem);line-height:1;letter-spacing:-.045em;margin:0 0 2rem}h3{font-size:1.4rem;letter-spacing:-.025em}
-.lead{font-size:clamp(1.2rem,2vw,1.55rem);max-width:790px;color:var(--muted)}.actions{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}.button{display:inline-block;text-decoration:none;padding:.8rem 1.1rem;border:1px solid var(--ink);font-weight:650}.button.primary{background:var(--ink);color:white}
-.metrics,.cards,.split{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}.metrics{grid-template-columns:repeat(3,1fr);margin-top:4rem}.metric,.card,.panel{background:var(--paper);padding:2rem}.metric strong{display:block;font-size:2.2rem;letter-spacing:-.05em}.metric span,.card p,.panel p{color:var(--muted)}
-.cards{grid-template-columns:repeat(2,1fr)}.card{text-decoration:none;transition:transform .2s}.card:hover{transform:translateY(-3px)}.card .num{font-size:.8rem;color:var(--accent);font-weight:700}.card .arrow{font-size:1.5rem}
-.split{grid-template-columns:1fr 1fr}.kicker{max-width:680px;color:var(--muted);font-size:1.1rem}.tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}.tag{border:1px solid var(--line);padding:.35rem .65rem;font-size:.8rem;color:var(--muted)}
-footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;margin-top:4rem}
-@media(max-width:700px){.site-header{align-items:flex-start}.site-header nav{gap:.7rem;flex-wrap:wrap;justify-content:flex-end}.metrics,.cards,.split{grid-template-columns:1fr}section{padding:4.5rem 1.25rem}.site-header,footer{padding:1.2rem 1.25rem}h1{font-size:clamp(3rem,16vw,5rem)}footer{align-items:flex-start;gap:1rem;flex-direction:column}}
+:root{--ink:#eaf0f6;--muted:#93a4b7;--line:#263449;--paper:#08111f;--surface:#0d1929;--accent:#61a6ff;--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}a{color:inherit}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:white;color:#111;padding:.6rem;z-index:30}
+.site-header,footer{max-width:var(--max);margin:auto;padding:1.35rem 2rem;display:flex;align-items:center;justify-content:space-between}.site-header{position:sticky;top:0;z-index:20;background:rgba(8,17,31,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.brand{display:flex;gap:.8rem;align-items:center;text-decoration:none}.mark{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--accent);font-weight:800;letter-spacing:-.08em}.brand-text{font-weight:700;line-height:1.05}.brand-text small{display:block;color:var(--muted);font-size:.67rem;font-weight:500;margin-top:.28rem;letter-spacing:.06em;text-transform:uppercase}
+nav{display:flex;gap:1.5rem;align-items:center}nav a{text-decoration:none;color:var(--muted);font-size:.88rem}nav a:hover{color:var(--ink)}nav .lang{color:var(--accent);font-weight:800;border-left:1px solid var(--line);padding-left:1.5rem}
+section{max-width:var(--max);margin:auto;padding:7rem 2rem}.hero{min-height:82vh;display:grid;align-content:center;position:relative}.hero:after{content:"";position:absolute;right:2rem;top:14%;width:36%;height:58%;background:linear-gradient(135deg,transparent 48%,rgba(97,166,255,.12) 49%,rgba(97,166,255,.12) 51%,transparent 52%);pointer-events:none}
+.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:800}.availability{color:var(--muted);font-size:.92rem;margin:.3rem 0 0}
+h1{font-size:clamp(3.5rem,8.5vw,7.7rem);line-height:.91;letter-spacing:-.065em;margin:.65rem 0 1.8rem;max-width:1050px;position:relative;z-index:1}h2{font-size:clamp(2.25rem,4.5vw,4.4rem);line-height:1;letter-spacing:-.05em;margin:0 0 2rem}h3{font-size:1.35rem;line-height:1.2;letter-spacing:-.025em}.lead{font-size:clamp(1.15rem,2vw,1.5rem);max-width:790px;color:var(--muted);position:relative;z-index:1}.kicker{max-width:720px;color:var(--muted);font-size:1.08rem}
+.actions{display:flex;gap:.8rem;margin-top:2.2rem;flex-wrap:wrap}.button{display:inline-block;text-decoration:none;padding:.85rem 1.15rem;border:1px solid var(--line);font-weight:700}.button.primary{background:var(--accent);border-color:var(--accent);color:#07101d}.button:hover{border-color:var(--accent)}
+.metrics,.cards,.split{display:grid;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.metrics{grid-template-columns:repeat(3,1fr);margin-top:4.5rem}.metric,.card,.panel{padding:2rem}.metric+.metric,.card+.card,.panel+.panel{border-left:1px solid var(--line)}.metric strong{display:block;font-size:2rem;letter-spacing:-.04em;color:var(--ink)}.metric span,.card p,.panel p{color:var(--muted)}.cards,.split{grid-template-columns:repeat(2,1fr)}.card{text-decoration:none;background:var(--surface);transition:transform .2s,background .2s}.card:hover{transform:translateY(-4px);background:#112036}.card .num{font-size:.72rem;color:var(--accent);font-weight:800;letter-spacing:.1em}.card .arrow{font-size:1.5rem;color:var(--accent)}
+.tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}.tag{border:1px solid var(--line);padding:.4rem .7rem;font-size:.78rem;color:var(--muted)}.process{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.process>div{padding:2rem 1.4rem;border-right:1px solid var(--line)}.process>div:last-child{border-right:0}.process b{color:var(--accent);font-size:.75rem}.process p{color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:3rem;color:var(--muted);font-size:.82rem}footer div{display:flex;gap:1rem}footer strong{color:var(--ink)}.footer-links a{text-decoration:none}
+@media(max-width:760px){.brand-text{display:none}.site-header,footer{padding:1rem 1.25rem}nav{gap:1rem}.metrics,.cards,.split,.process{grid-template-columns:1fr}.metric+.metric,.card+.card,.panel+.panel{border-left:0;border-top:1px solid var(--line)}.process>div{border-right:0;border-bottom:1px solid var(--line)}section{padding:5rem 1.25rem}.hero{min-height:76vh}.hero:after{display:none}h1{font-size:clamp(3.1rem,15vw,5.2rem)}footer{align-items:flex-start;flex-direction:column;gap:1rem}}
 </style>
