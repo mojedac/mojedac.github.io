@@ -30,4 +30,4 @@ La implementación considerará HTML semántico, rendimiento, accesibilidad, met
 
 ## Estado
 
-Fundación del sitio en diseño. Ver [arquitectura de información](docs/information-architecture.md) e [inventario de contenido](docs/content-inventory.md).
+V1 en desarrollo continuo y publicación automática mediante GitHub Pages. Ver [arquitectura de información](docs/information-architecture.md) e [inventario de contenido](docs/content-inventory.md).
