@@ -1,0 +1,74 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+const { title, description, canonical = Astro.url.pathname } = Astro.props;
+const canonicalURL = new URL(canonical, Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Marcelo Ojeda Cárdenas',
+  url: 'https://mojedac.github.io',
+  jobTitle: 'Software Architect',
+  sameAs: [
+    'https://github.com/mojedac',
+    'https://www.linkedin.com/in/mojedac/'
+  ],
+  knowsAbout: [
+    'Software Architecture','Solution Architecture','Systems Integration',
+    'SaaS Architecture','Enterprise Systems','Java','Spring Boot',
+    'REST APIs','Google Cloud Platform'
+  ]
+};
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="description" content={description} />
+  <meta name="author" content="Marcelo Ojeda Cárdenas" />\n  <meta name="theme-color" content="#101418" />\n  <meta name="robots" content="index,follow,max-image-preview:large" />\n  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="canonical" href={canonicalURL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:site_name" content="Marcelo Ojeda — Software Architecture" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>{title}</title>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</head>
+<body>
+  <a class="skip" href="#contenido">Ir al contenido</a>
+  <header class="site-header">
+    <a class="brand" href="/">MO<span>.</span></a>
+    <nav aria-label="Navegación principal">
+      <a href="/#casos">Casos</a>
+      <a href="/#experiencia">Experiencia</a>
+      <a href="/about/">Perfil</a>
+      <a href="/#contacto">Contacto</a>
+    </nav>
+  </header>
+  <main id="contenido"><slot /></main>
+  <footer><span>Marcelo Ojeda</span><span>Software Architecture · Santiago, Chile</span></footer>
+</body>
+</html>
+
+<style is:global>
+:root{--ink:#101418;--muted:#5d6770;--line:#dfe4e8;--paper:#f7f8f7;--accent:#155eef;--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+a{color:inherit}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:white;padding:.6rem;z-index:20}
+.site-header,footer{max-width:var(--max);margin:auto;padding:1.4rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.site-header{border-bottom:1px solid var(--line)}.brand{text-decoration:none;font-weight:800;font-size:1.2rem;letter-spacing:-.04em}.brand span,.eyebrow{color:var(--accent)}
+nav{display:flex;gap:1.5rem}nav a{text-decoration:none;color:var(--muted);font-size:.9rem}nav a:hover{color:var(--ink)}
+section{max-width:var(--max);margin:auto;padding:6.5rem 2rem}.hero{min-height:78vh;display:grid;align-content:center}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:700}
+h1{font-size:clamp(3.4rem,8vw,7.6rem);line-height:.91;letter-spacing:-.065em;margin:.5rem 0 1.8rem;max-width:1050px}h2{font-size:clamp(2rem,4vw,4rem);line-height:1;letter-spacing:-.045em;margin:0 0 2rem}h3{font-size:1.4rem;letter-spacing:-.025em}
+.lead{font-size:clamp(1.2rem,2vw,1.55rem);max-width:790px;color:var(--muted)}.actions{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}.button{display:inline-block;text-decoration:none;padding:.8rem 1.1rem;border:1px solid var(--ink);font-weight:650}.button.primary{background:var(--ink);color:white}
+.metrics,.cards,.split{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}.metrics{grid-template-columns:repeat(3,1fr);margin-top:4rem}.metric,.card,.panel{background:var(--paper);padding:2rem}.metric strong{display:block;font-size:2.2rem;letter-spacing:-.05em}.metric span,.card p,.panel p{color:var(--muted)}
+.cards{grid-template-columns:repeat(2,1fr)}.card{text-decoration:none;transition:transform .2s}.card:hover{transform:translateY(-3px)}.card .num{font-size:.8rem;color:var(--accent);font-weight:700}.card .arrow{font-size:1.5rem}
+.split{grid-template-columns:1fr 1fr}.kicker{max-width:680px;color:var(--muted);font-size:1.1rem}.tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}.tag{border:1px solid var(--line);padding:.35rem .65rem;font-size:.8rem;color:var(--muted)}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;margin-top:4rem}
+@media(max-width:700px){.site-header{align-items:flex-start}.site-header nav{gap:.7rem;flex-wrap:wrap;justify-content:flex-end}.metrics,.cards,.split{grid-template-columns:1fr}section{padding:4.5rem 1.25rem}.site-header,footer{padding:1.2rem 1.25rem}h1{font-size:clamp(3rem,16vw,5rem)}footer{align-items:flex-start;gap:1rem;flex-direction:column}}
+</style>

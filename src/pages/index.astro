@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = 'Marcelo Ojeda | Software Architect · SaaS · Integration · Cloud';
+const description = 'Software Architect con más de 20 años diseñando, integrando y evolucionando sistemas críticos, plataformas enterprise y productos SaaS.';
+---
+<BaseLayout {title} {description}>
+  <section class="hero">
+    <p class="eyebrow">Software Architect · Santiago, Chile</p>
+    <h1>Diseño sistemas que conectan tecnología y negocio.</h1>
+    <p class="lead">Más de 20 años diseñando, integrando y evolucionando sistemas críticos: desde plataformas enterprise y operaciones omnicanal hasta productos SaaS construidos desde cero.</p>
+    <div class="actions">
+      <a class="button primary" href="#casos">Ver casos de arquitectura</a>
+      <a class="button" href="/about/">Conocer mi enfoque</a>
+    </div>
+    <div class="metrics" aria-label="Experiencia destacada">
+      <div class="metric"><strong>20+ años</strong><span>arquitectura, ingeniería e integración</span></div>
+      <div class="metric"><strong>50+ tiendas</strong><span>ecosistemas retail y operación omnicanal</span></div>
+      <div class="metric"><strong>0 → SaaS</strong><span>producto B2B multi-tenant diseñado desde origen</span></div>
+    </div>
+  </section>
+
+  <section id="casos">
+    <p class="eyebrow">Architecture Stories</p>
+    <h2>Arquitectura explicada desde el problema.</h2>
+    <p class="kicker">No sólo qué tecnología se usó. Cada caso muestra contexto, restricciones, decisiones, arquitectura y resultado, con una lectura ejecutiva y otra técnica.</p>
+    <div class="cards">
+      <a class="card" href="/architecture/retail-omnichannel/"><span class="num">01 · RETAIL</span><h3>De una operación B2B a un ecosistema omnicanal</h3><p>E-commerce, marketplaces, tiendas, ERP, WMS, inventario y logística evolucionando como un sistema conectado.</p><span class="arrow">→</span></a>
+      <a class="card" href="/architecture/saas-platform/"><span class="num">02 · SaaS</span><h3>Diseñar un producto B2B multi-tenant desde cero</h3><p>Dominio, seguridad, APIs, frontend, persistencia y cloud diseñados como producto, no como piezas aisladas.</p><span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <section id="experiencia">
+    <p class="eyebrow">Experiencia</p><h2>Legacy, modernización y producto.</h2>
+    <div class="split">
+      <div class="panel"><h3>Sistemas enterprise</h3><p>Experiencia en retail, logística, servicios financieros y seguros. Arquitectura de aplicaciones, integración de sistemas y evolución de plataformas que sostienen operaciones reales.</p></div>
+      <div class="panel"><h3>Arquitectura hands-on</h3><p>Diseño con profundidad de implementación. Java, Spring Boot, REST APIs, React, bases de datos y cloud son herramientas para materializar decisiones arquitectónicas.</p></div>
+    </div>
+  </section>
+
+  <section id="perfil">
+    <p class="eyebrow">Perfil</p><h2>Arquitectura con contexto.</h2>
+    <p class="lead">Trabajo donde tecnología y negocio se encuentran: entender el problema, reducir complejidad, diseñar límites claros y construir sistemas que puedan evolucionar. Mi experiencia abarca sistemas legacy de alta criticidad, integración enterprise, modernización y creación de productos SaaS.</p>
+    <div class="tags"><span class="tag">Software Architecture</span><span class="tag">Solution Architecture</span><span class="tag">Systems Integration</span><span class="tag">SaaS Architecture</span><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">REST APIs</span><span class="tag">GCP</span></div>
+  </section>
+
+  <section id="contacto">
+    <p class="eyebrow">Contacto</p><h2>Conversemos sobre sistemas difíciles.</h2>
+    <p class="kicker">Arquitectura de software, integración, modernización de plataformas y construcción de productos digitales.</p>
+    <div class="actions"><a class="button primary" href="https://www.linkedin.com/in/mojedac/" rel="me">LinkedIn</a><a class="button" href="https://github.com/mojedac" rel="me">GitHub</a></div>
+  </section>
+</BaseLayout>
