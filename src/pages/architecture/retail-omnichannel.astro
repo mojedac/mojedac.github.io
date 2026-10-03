@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const title='Evolución retail y arquitectura omnicanal | Marcelo Ojeda';
 const description='Caso de arquitectura: evolución de una operación retail B2B hacia un ecosistema omnicanal integrado con tiendas, e-commerce, marketplaces, ERP, WMS e inventario.';
 ---
-<BaseLayout {title} {description}>
+<BaseLayout {title} {description} lang="es">
 <section class="hero">
 <p class="eyebrow">Architecture Story · 01</p>
 <h1>De operación B2B a ecosistema omnicanal.</h1>
@@ -23,4 +23,4 @@ const description='Caso de arquitectura: evolución de una operación retail B2B
 <section><p class="eyebrow">Rol</p><h2>Arquitectura que también llega a implementación.</h2><div class="cards"><div class="card"><h3>Integración</h3><p>Diseño y evolución de integraciones entre canales comerciales, sistemas centrales y operadores externos.</p></div><div class="card"><h3>Plataformas críticas</h3><p>Evolución de sistemas relacionados con pedidos, inventario, bodega y despacho.</p></div><div class="card"><h3>Decisiones técnicas</h3><p>Evaluación de soluciones con foco en continuidad operacional, escalabilidad y alineación con procesos de negocio.</p></div><div class="card"><h3>Profundidad técnica</h3><p>Participación hands-on en backend, APIs, bases de datos e integración enterprise.</p></div></div></section>
 <section><p class="eyebrow">Nota</p><p class="kicker">Este caso describe patrones, escala y responsabilidades profesionales. La arquitectura está deliberadamente abstraída para no exponer topología, configuración ni información operacional confidencial.</p><div class="actions"><a class="button" href="/">← Volver al inicio</a></div></section>
 </BaseLayout>
-<style>.system-map{border:1px solid var(--line);padding:clamp(1.2rem,4vw,3rem);margin:2rem 0 2.5rem}.row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.row span,.core{background:white;border:1px solid var(--line);padding:1.2rem;text-align:center;font-weight:650}.core{max-width:650px;margin:auto}.flow{text-align:center;font-size:1.6rem;padding:.7rem}@media(max-width:700px){.row{grid-template-columns:1fr}}</style>
+<style>.system-map{border:1px solid var(--line);padding:clamp(1.2rem,4vw,3rem);margin:2rem 0 2.5rem}.row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.row span,.core{background:var(--surface);border:1px solid var(--line);padding:1.2rem;text-align:center;font-weight:650}.core{max-width:650px;margin:auto}.flow{text-align:center;font-size:1.6rem;padding:.7rem}@media(max-width:700px){.row{grid-template-columns:1fr}}</style>
