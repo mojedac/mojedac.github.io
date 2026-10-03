@@ -1,0 +1,4 @@
+Contact: https://www.linkedin.com/in/mojedac/
+Preferred-Languages: es, en
+Canonical: https://mojedac.github.io/.well-known/security.txt
+Expires: 2027-10-03T23:59:59Z
