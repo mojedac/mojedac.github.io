@@ -1,0 +1,11 @@
+# Marcelo Ojeda — Software Architect
+
+> Professional site about software architecture, systems integration, enterprise modernization and SaaS product architecture.
+
+Marcelo Ojeda is a Software Architect based in Santiago, Chile, with more than 20 years of experience across retail, logistics, financial services and insurance.
+
+Primary topics: Software Architecture, Solution Architecture, Systems Integration, SaaS Architecture, Enterprise Systems, Java, Spring Boot, REST APIs and Google Cloud Platform.
+
+Canonical site: https://mojedac.github.io
+GitHub: https://github.com/mojedac
+LinkedIn: https://www.linkedin.com/in/mojedac/
